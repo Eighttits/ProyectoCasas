@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">EasyHouse</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let alojamiento of alojamientos">
+    <ion-img src="{{ alojamiento.imagen }}" alt="alojamiento"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
+      <ion-card-subtitle
+        >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content> {{ alojamiento.ciudad }} </ion-card-content>
+    <ion-card-content> ${{ alojamiento.precio }} </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button>
+          <ion-icon name="search-outline"></ion-icon>
+          <ion-label>Búsqueda</ion-label>
+        </ion-tab-button>
+        <ion-tab-button>
+          <ion-icon name="heart-outline"></ion-icon>
+          <ion-label>Favoritos</ion-label>
+        </ion-tab-button>
+        <ion-tab-button>
+          <ion-icon name="map-outline"></ion-icon>
+          <ion-label>Mapa</ion-label>
+        </ion-tab-button>
+        <ion-tab-button>
+          <ion-icon name="chatbox-outline"></ion-icon>
+          <ion-label>Mensajes</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="routerUsuarioPage()">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Usuario</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>camara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="tomarFoto()" shape="round">
+          Tomar Foto
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="subirFoto()" shape="round">
+          Subir Foto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="box">
+    <img src="{{photo}}">
+  </div>
+</ion-content>

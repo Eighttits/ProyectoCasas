@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Contactos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-avatar aria-hidden="true" slot="start">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/user-profile-icon.png" alt="">
+      </ion-avatar>
+      <ion-label>Huey</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar aria-hidden="true" slot="start">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/user-profile-icon.png" alt="">
+      </ion-avatar>
+      <ion-label>Dewey</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar aria-hidden="true" slot="start">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/user-profile-icon.png" alt="">
+      </ion-avatar>
+      <ion-label>Loule</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar aria-hidden="true" slot="start">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/user-profile-icon.png" alt="">
+      </ion-avatar>
+      <ion-label>Foole</ion-label>
+    </ion-item>
+    <ion-label>
+      <p>Alert</p>
+    </ion-label>
+    <ion-item>
+      <ion-select label="Lenguajes" label-placement="floating">
+        <ion-select-option value="apple">C#</ion-select-option>
+        <ion-select-option value="banana">PHP</ion-select-option>
+        <ion-select-option value="orange">Dart</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label>
+      <p>Sheet</p>
+    </ion-label>
+    <ion-item>
+      <ion-select label="Lenguajes" interface="action-sheet" label-placement="floating">
+        <ion-select-option value="apple">C#</ion-select-option>
+        <ion-select-option value="banana">PHP</ion-select-option>
+        <ion-select-option value="orange">Dart</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label>
+      <p>Alert</p>
+    </ion-label>
+    <ion-item>
+      <ion-select label="Lenguajes" interface="popover" label-placement="floating">
+        <ion-select-option value="apple">C#</ion-select-option>
+        <ion-select-option value="banana">PHP</ion-select-option>
+        <ion-select-option value="orange">Dart</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-toast trigger="open-toast" message="Mostrando mensaje por 5 segundos" [duration]="5000"></ion-toast>
+    <!-- <ion-item>
+      <ion-label>
+        <p>Toast por funcion</p>
+      </ion-label>
+      <ion-button expand="block" (click)="mostrarToast('bottom')">Mostrar Toast</ion-button>
+    </ion-item> -->
+  </ion-list>
+</ion-content>
