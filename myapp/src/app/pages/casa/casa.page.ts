@@ -29,7 +29,6 @@ export class CasaPage implements OnInit {
     this.alojamientosService.obtenerDetalleAlojamiento(idAlojamiento).subscribe(
       (data) => {
         this.detalleAlojamiento = data;
-        console.log(this.detalleAlojamiento);
       },
       (error) => {
         console.error('Error al obtener alojamientos:', error);
