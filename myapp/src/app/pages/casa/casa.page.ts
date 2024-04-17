@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CasaPage implements OnInit {
 
   detalleAlojamiento: any[] = [];
+  serviciosAlojamiento: any[] = [];
   idAlojamiento : number;
 
   constructor(private alojamientosService: AlojamientosService, private route: ActivatedRoute) { }
@@ -23,12 +24,24 @@ export class CasaPage implements OnInit {
     });
     
     this.obtenerDetalleAlojamiento(this.idAlojamiento);
+    this.obtenerServiciosAlojamiento(this.idAlojamiento);
+    
   }
 
   obtenerDetalleAlojamiento(idAlojamiento: number) {
     this.alojamientosService.obtenerDetalleAlojamiento(idAlojamiento).subscribe(
       (data) => {
         this.detalleAlojamiento = data;
+      },
+      (error) => {
+        console.error('Error al obtener alojamientos:', error);
+      }
+    );
+  }
+  obtenerServiciosAlojamiento(idAlojamiento: number) {
+    this.alojamientosService.obtenerServiciosAlojamiento(idAlojamiento).subscribe(
+      (data) => {
+        this.serviciosAlojamiento= data;
       },
       (error) => {
         console.error('Error al obtener alojamientos:', error);

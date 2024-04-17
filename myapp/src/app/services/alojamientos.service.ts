@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AlojamientosService {
   url = "http://localhost:3000/api/alojamientos";
+  urlServicios = "http://localhost:3000/api/servicios";
 
   constructor(private http: HttpClient) { }
 
@@ -15,5 +16,8 @@ export class AlojamientosService {
   }
   obtenerDetalleAlojamiento(id: number): Observable<any>{
     return this.http.get(this.url+"/"+id);
+  }
+  obtenerServiciosAlojamiento(id: number): Observable<any>{
+    return this.http.get(this.urlServicios+"/"+id);
   }
 }

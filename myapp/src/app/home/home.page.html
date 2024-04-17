@@ -20,8 +20,12 @@
         >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
       >
     </ion-card-header>
-    <ion-card-content> {{ alojamiento.ciudad }} </ion-card-content>
-    <ion-card-content> ${{ alojamiento.precio }} </ion-card-content>
+    <ion-card-content>
+      <div class="ion-margin-bottom">
+        <ion-icon name="location-outline"></ion-icon>{{ alojamiento.ciudad }}
+      </div>
+      <div>${{ alojamiento.precio }}</div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 

@@ -18,8 +18,23 @@ router.get("/alojamientos", (req, res) => {
 router.get("/alojamientos/:id", (req, res) => {
   const idAlojamiento = req.params.id;
   mysqlConnection.query(
-    "SELECT DISTINCT a.id AS id_alojamiento, c.nombre AS nombre, a.tipo_propiedad AS tipo, u.ciudad AS ciudad, a.precio_noche AS precio, FIRST_VALUE(f.url) OVER (PARTITION BY f.id_alojamiento ORDER BY f.id) AS imagen FROM alojamientos a INNER JOIN caracteristicas c ON c.id_alojamiento = a.id INNER JOIN fotos f ON f.id_alojamiento = a.id INNER JOIN ubicaciones u ON u.id_alojamiento = a.id WHERE a.id = ?",
+    "SELECT DISTINCT a.id AS id_alojamiento, c.nombre AS nombre, a.tipo_propiedad AS tipo, u.ciudad AS ciudad, a.precio_noche AS precio, FIRST_VALUE(f.url) OVER (PARTITION BY f.id_alojamiento ORDER BY f.id) AS imagen, c.descripcion AS descripcion FROM alojamientos a INNER JOIN caracteristicas c ON c.id_alojamiento = a.id INNER JOIN fotos f ON f.id_alojamiento = a.id INNER JOIN ubicaciones u ON u.id_alojamiento = a.id WHERE a.id = ?",
     [idAlojamiento],
+    (err, result) => {
+      if (!err) {
+        res.json(result);
+      } else {
+        res.send(err);
+      }
+    }
+  );
+});
+
+router.get("/servicios/:id", (req, res) => {
+  const idServicio = req.params.id;
+  mysqlConnection.query(
+    "SELECT s.nombre AS servicio FROM alojamiento_servicios a INNER JOIN servicios s ON s.id = a.id_servicio WHERE a.id_alojamiento = ?",
+    [idServicio],
     (err, result) => {
       if (!err) {
         res.json(result);
