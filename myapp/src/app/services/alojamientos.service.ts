@@ -13,4 +13,7 @@ export class AlojamientosService {
   obtenerAlojamientos(): Observable<any>{
     return this.http.get(this.url);
   }
+  obtenerDetalleAlojamiento(id: number): Observable<any>{
+    return this.http.get(this.url+"/"+id);
+  }
 }

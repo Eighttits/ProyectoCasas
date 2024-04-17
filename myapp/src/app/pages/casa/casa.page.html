@@ -1,15 +1,16 @@
 <ion-header [translucent]="true"> </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngFor="let alojamiento of detalleAlojamiento">
   <ion-card>
     <img
-      src="../../../assets/img/apartamento.jpg"
+      src="{{ alojamiento.imagen }}"
       alt="Imagen del apartamento"
       width="100%"
     />
     <ion-card-header>
-      <ion-card-title>Apartamento en Orlando</ion-card-title>
+      <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
     </ion-card-header>
+    <!-- Descripción y calificaciones pendientes -->
     <ion-card-content>
       <div style="display: flex; align-items: center">
         <ion-icon
@@ -57,7 +58,7 @@
         <ion-item>
           <ion-avatar slot="start">
             <img
-              src="../../../assets/img/avatar.png"
+              src="../../../assets/img/avatar.jpg"
               alt="Avatar del usuario"
             />
           </ion-avatar>

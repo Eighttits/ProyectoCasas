@@ -9,7 +9,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let alojamiento of alojamientos">
-    <ion-img src="{{ alojamiento.imagen }}" alt="alojamiento"></ion-img>
+    <ion-img
+      src="{{ alojamiento.imagen }}"
+      alt="alojamiento"
+      (click)="routerCasa(alojamiento.id_alojamiento)"
+    ></ion-img>
     <ion-card-header>
       <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
       <ion-card-subtitle

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from '../services/users.service';
 import { AlojamientosService } from '../services/alojamientos.service';
 
 
@@ -38,5 +37,8 @@ export class HomePage {
   }
   routerContacts() {
     this.router.navigate(["/menu/contactos"]);
+  }
+  routerCasa(id: number) {
+    this.router.navigate(["/../casa", id]);
   }
 }

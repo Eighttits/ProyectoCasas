@@ -29,13 +29,14 @@ const routes: Routes = [
   // },
 
   {
-    path: 'casa',
+    path: 'casa/:id',
     loadChildren: () => import('./pages/casa/casa.module').then( m => m.CasaPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule)
   },
