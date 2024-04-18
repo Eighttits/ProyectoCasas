@@ -41,4 +41,8 @@ export class HomePage {
   routerCasa(id: number) {
     this.router.navigate(["/../casa", id]);
   }
+
+  prueba() {
+    this.router.navigate(["pagesAdmin/add-house"]);
+  }
 }

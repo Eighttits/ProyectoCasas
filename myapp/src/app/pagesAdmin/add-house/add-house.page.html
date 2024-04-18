@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>add-house</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Añadir casa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Formulario para añadir una casa -->
+  <ion-item>
+    <ion-label position="floating">Nombre de la casa</ion-label>
+    <ion-input [(ngModel)]="nombre" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-textarea [(ngModel)]="descripcion" required></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo de propiedad</ion-label>
+    <ion-select [(ngModel)]="tipo" required>
+      <ion-select-option value="Apartamento">Apartamento</ion-select-option>
+      <ion-select-option value="Casa">Casa</ion-select-option>
+      <ion-select-option value="Villa">Villa</ion-select-option>
+      <!-- Añade más opciones según sea necesario -->
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Dirección</ion-label>
+    <ion-input [(ngModel)]="direccion" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Precio por noche</ion-label>
+    <ion-input [(ngModel)]="precioPorNoche" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">País</ion-label>
+    <ion-input [(ngModel)]="pais" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Estado</ion-label>
+    <ion-input [(ngModel)]="estado" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Ciudad</ion-label>
+    <ion-input [(ngModel)]="ciudad" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Código postal</ion-label>
+    <ion-input [(ngModel)]="codigoPostal" type="number" required></ion-input>
+  </ion-item>
+
+  <!-- Botón para capturar una foto -->
+  <ion-button expand="block" (click)="cargarFoto()">Capturar foto</ion-button>
+
+  <!-- Mostrar las fotos capturadas -->
+  <ion-list *ngIf="fotos.length > 0">
+    <ion-item *ngFor="let foto of fotos">
+      <img [src]="foto" alt="Foto capturada" />
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón para agregar casa -->
+  <ion-button expand="block" (click)="agregarCasa()">Añadir casa</ion-button>
+</ion-content>

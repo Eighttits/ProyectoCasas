@@ -48,6 +48,11 @@ const routes: Routes = [
     path: 'pagesAdmin/home-admin',
     loadChildren: () => import('./pagesAdmin/home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
   },
+  {
+    path: 'pagesAdmin/add-house',
+    loadChildren: () => import('./pagesAdmin/add-house/add-house.module').then( m => m.AddHousePageModule)
+  },
+
 ];
 
 @NgModule({

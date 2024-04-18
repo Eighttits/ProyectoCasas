@@ -46,6 +46,10 @@ export class HomeAdminPage implements OnInit {
     );
   }
 
+  agregarCasaPage(){
+    this.router.navigate(['pagesAdmin/add-house']);
+  }
+
   destruirSesion() {
     this.usuariosService.destroySession();
     this.router.navigate(['../login']);
