@@ -56,9 +56,10 @@ export class LoginPage implements OnInit {
           .subscribe(
             async respuesta => {
               if (respuesta.status) {
-                this.router.navigate(["pagesAdmin/home-admin"]);
-                localStorage.setItem('correo', respuesta.datos[0].correo);
+                localStorage.setItem('idusuario', respuesta.datos[0].id);
+                console.log(localStorage.getItem('idusuario'));
                 localStorage.setItem('rol', 'admin');
+                this.router.navigate(["pagesAdmin/home-admin"]);
               } else {
                 const alert = await this.alertController.create({
                   header: "ERROR AUTENTICACIÓN",
@@ -87,7 +88,7 @@ export class LoginPage implements OnInit {
             async respuesta => {
               if (respuesta.status) {
                 this.router.navigate(["/home"]);
-                localStorage.setItem('correo', respuesta.datos[0].correo);
+                localStorage.setItem('idusuario', respuesta.datos[0].id);
                 localStorage.setItem('rol', 'user');
               } else {
                 const alert = await this.alertController.create({

@@ -15,9 +15,8 @@ export class AlojamientosService {
     return this.http.get(this.url);
   }
 
-  obtenerAlojamientosPorUsuario(): Observable<any>{
-    const urlConParametros = `${this.url}?localStorage.getItem('correo')`;
-    return this.http.get(urlConParametros);
+  obtenerAlojamientosPorUsuario(id: number): Observable<any>{
+    return this.http.get(this.url+"/"+id);
   }
   obtenerDetalleAlojamiento(id: number): Observable<any>{
     return this.http.get(this.url+"/"+id);
