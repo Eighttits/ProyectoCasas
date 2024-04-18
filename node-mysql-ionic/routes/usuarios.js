@@ -91,4 +91,21 @@ router.post('/loginAdmin', (req, res) => {
   });
 });
 
+router.get("/reservasUsuario/:id", (req, res) => {
+  console.log("hola");
+  const idUsuario = req.params.id;
+  
+  mysqlConnection.query(
+    "SELECT DISTINCT r.id AS id_reserva, c.nombre AS nombre, FIRST_VALUE(f.url) OVER (PARTITION BY f.id_alojamiento ORDER BY f.id) AS imagen, a.tipo_propiedad AS tipo, u.ciudad AS ciudad, r.precio_total AS precio, r.fecha_inicio AS fecha_inicio, r.fecha_fin AS fecha_fin FROM reservas r INNER JOIN alojamientos a ON a.id = r.id_alojamiento INNER JOIN caracteristicas c ON c.id_alojamiento = a.id INNER JOIN ubicaciones u ON u.id_alojamiento = a.id INNER JOIN fotos f ON f.id_alojamiento = a.id WHERE r.id_cliente = ?",
+    [idUsuario],
+    (err, result) => {
+      if (!err) {
+        res.json(result);
+      } else {
+        res.send(err);
+      }
+    }
+  );
+});
+
 module.exports = router;

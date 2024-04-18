@@ -1,15 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>usuario</ion-title>
+    <div class="ion-text-center">
+      <span class="ion-margin-top ion-margin-end" style="font-size: 1.2em;">Usuario</span><ion-button size="small" (click)="destruirSesion()">Cerrar sesión</ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">usuario</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-button (click)="destruirSesion()">Cerrar session</ion-button>
+  <ion-card *ngFor="let alojamiento of reservasUsuario">
+    <ion-img
+      src="{{ alojamiento.imagen }}"
+      alt="alojamiento"
+      (click)="routerCasa(alojamiento.id_alojamiento)"
+    ></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
+      <ion-card-subtitle
+        >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-margin-bottom">
+        <ion-icon name="location-outline"></ion-icon>{{ alojamiento.ciudad }}
+      </div>
+      <div class="ion-margin-bottom">${{ alojamiento.precio }}</div>
+      <div>Desde: {{ alojamiento.fecha_inicio | date: 'dd/MM/yyyy' }}, Hasta: {{ alojamiento.fecha_fin | date: 'dd/MM/yyyy' }}</div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

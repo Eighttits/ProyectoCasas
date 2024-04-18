@@ -14,6 +14,7 @@ export class UsersService {
   urlIdUsuario = "http://localhost:3000/api/idUsuario";
   urlLogin = "http://localhost:3000/api/login";
   urlLoginAdmin = "http://localhost:3000/api/loginAdmin";
+  urlReservas= "http://localhost:3000/api/reservasUsuario";
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +56,10 @@ export class UsersService {
 
   loginAdmin(datos: any): Observable<any> {
     return this.http.post<any>(this.urlLoginAdmin, datos);
+  }
+
+  obtenerReservasUsuario(id: number): Observable<any>{
+    return this.http.get(this.urlReservas+"/"+id);
   }
 
 }

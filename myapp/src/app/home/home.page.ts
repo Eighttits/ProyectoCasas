@@ -11,6 +11,7 @@ import { AlojamientosService } from '../services/alojamientos.service';
 export class HomePage {
 
   alojamientos: any[] = [];
+  filteredAlojamientos: any[] = []
 
   constructor(private router: Router, private alojamientosService: AlojamientosService) {}
   
@@ -22,11 +23,26 @@ export class HomePage {
     this.alojamientosService.obtenerAlojamientos().subscribe(
       (data) => {
         this.alojamientos = data;
+        this.filterAlojamientos("");
       },
       (error) => {
         console.error('Error al obtener alojamientos:', error);
       }
     );
+  }
+
+  filterAlojamientos(event: any) {
+    let searchTerm = (event.target as HTMLInputElement)?.value.trim();
+    if (searchTerm) {
+      // Filtrar alojamientos solo si hay un término de búsqueda
+      this.filteredAlojamientos = this.alojamientos.filter((alojamiento) => {
+        return alojamiento.nombre.toLowerCase().includes(searchTerm.toLowerCase());
+        // Puedes agregar más condiciones de búsqueda si es necesario
+      });
+    } else {
+      // Si no hay término de búsqueda, mostrar todos los alojamientos
+      this.filteredAlojamientos = this.alojamientos;
+    }
   }
 
   routerUsuarioPage() {

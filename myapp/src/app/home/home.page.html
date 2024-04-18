@@ -3,12 +3,12 @@
     <ion-title class="ion-text-center">EasyHouse</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="filterAlojamientos($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let alojamiento of alojamientos">
+  <ion-card *ngFor="let alojamiento of filteredAlojamientos">
     <ion-img
       src="{{ alojamiento.imagen }}"
       alt="alojamiento"

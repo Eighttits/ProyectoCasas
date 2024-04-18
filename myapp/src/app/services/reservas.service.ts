@@ -11,7 +11,6 @@ export class ReservasService {
   constructor(private http: HttpClient) { }
 
   realizarReserva(datos: any): Observable<any> {
-    console.log(datos);
     return this.http.post<any>(this.url, datos);
   }
 
@@ -19,5 +18,9 @@ export class ReservasService {
     const urlWithParams = `${this.url}/${id}?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
     return this.http.get(urlWithParams);
   }  
+
+  obtenerReservas(): Observable<any>{
+    return this.http.get(this.url);
+  }
 
 }
