@@ -59,4 +59,21 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/loginAdmin', (req, res) => {
+  const {correo, password } = req.body;
+
+  mysqlConnection.query('SELECT * FROM usuarios WHERE email = ? AND password = ?',
+  [correo, password], (err,result) => {
+      if(!err){
+          if(result.length > 0){
+              res.json({status: true, message: "El usuario si existe",datos: result});
+          }else{
+              res.json({status: false, message: "El usuario no existe",datos: []}); 
+          }
+      }else{
+          res.json({status: false, message: "Error al consultar el usuario",datos: []});
+      }
+  });
+});
+
 module.exports = router;
