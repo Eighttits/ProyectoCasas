@@ -58,6 +58,8 @@ export class LoginPage implements OnInit {
               if (respuesta.status) {
                 localStorage.setItem('idusuario', respuesta.datos[0].id);
                 console.log(localStorage.getItem('idusuario'));
+                this.router.navigate(["pagesAdmin/home-admin"]);
+                localStorage.setItem('correo', this.correo);
                 localStorage.setItem('rol', 'admin');
                 this.router.navigate(["pagesAdmin/home-admin"]);
               } else {
@@ -88,7 +90,9 @@ export class LoginPage implements OnInit {
             async respuesta => {
               if (respuesta.status) {
                 this.router.navigate(["/home"]);
+
                 localStorage.setItem('idusuario', respuesta.datos[0].id);
+                localStorage.setItem('correo', this.correo);
                 localStorage.setItem('rol', 'user');
               } else {
                 const alert = await this.alertController.create({

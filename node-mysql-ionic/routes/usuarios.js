@@ -12,6 +12,21 @@ router.get("/usuarios", (req, res) => {
   });
 });
 
+router.get("/idUsuario/:correo", (req, res) => {
+  const correo = req.params.correo;
+  mysqlConnection.query(
+    "SELECT id FROM usuarios WHERE email = ?",
+    [correo],
+    (err, result) => {
+      if (!err) {
+        res.json(result);
+      } else {
+        res.send(err);
+      }
+    }
+  );
+});
+
 router.get("/usuarios/:id", (req, res) => {
   const idUsuario = req.params.id;
   mysqlConnection.query(

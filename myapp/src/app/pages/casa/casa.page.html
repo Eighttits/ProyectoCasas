@@ -12,23 +12,27 @@
       <ion-card-subtitle
         >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
       >
-      <div class="ion-margin-top">
+      <div class="ion-margin-top ion-justify-content-start">
         <ion-icon name="location-outline"></ion-icon>{{ alojamiento.ciudad }}
         <span class="ion-margin-start">${{ alojamiento.precio }}</span>
-        <ion-button size="small" class="ion-margin-start ion-margin-bottom"
-          >Reservar</ion-button
-        >
       </div>
     </ion-card-header>
-    <!-- Calificaciones pendientes -->
     <ion-card-content>
-      <div style="display: flex; align-items: center">
+      <div
+        style="display: flex; align-items: center"
+        *ngFor="let calificacion of calificacionesAlojamiento"
+      >
         <ion-icon
           name="star"
           style="margin-right: 5px"
-          class="ion-color-warning"
+          color="warning"
         ></ion-icon>
-        <p style="margin: 0">4.8 (95 calificaciones)</p>
+        <p>
+          {{ calificacion.promedio }} ({{ calificacion.total }} calificaciones)
+        </p>
+        <ion-button size="small" class="ion-margin-start" (click)="reservar(alojamiento.id_alojamiento, alojamiento.precio)"
+          >Reservar</ion-button
+        >
       </div>
     </ion-card-content>
   </ion-card>
@@ -42,10 +46,10 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Que ofrece el lugar</ion-card-title>
+      <ion-card-title>¿Qué ofrece el lugar?</ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let servicio of serviciosAlojamiento">
-      <ul class="list-unstyled">
+    <ion-card-content>
+      <ul class="list-unstyled" *ngFor="let servicio of serviciosAlojamiento">
         <li>{{ servicio.servicio }}</li>
       </ul>
     </ion-card-content>
@@ -56,22 +60,23 @@
       <ion-card-title>Reseñas</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
+      <ion-list *ngFor="let comentario of comentariosAlojamiento">
         <ion-item>
           <ion-avatar slot="start">
             <img
-              src="../../../assets/img/avatar.jpg"
+              src="../../../assets/img/avatar.png"
               alt="Avatar del usuario"
             />
           </ion-avatar>
           <ion-label>
-            <h2>Nombre del Usuario</h2>
-            <p>Comentario del usuario.</p>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star-half"></ion-icon>
-            <ion-icon name="star-outline"></ion-icon>
+            <h2>{{ comentario.nombre }}</h2>
+            <p>{{ comentario.comentario }}</p>
+            <ion-icon
+              *ngFor="let estrella of getArrayEstrellas(comentario.calificacion)"
+              [name]="estrella ? 'star' : 'star-outline'"
+              color="warning"
+            >
+            </ion-icon>
           </ion-label>
         </ion-item>
       </ion-list>
