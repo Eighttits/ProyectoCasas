@@ -9,15 +9,23 @@
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let alojamiento of alojamientos">
-    <ion-img src="{{ alojamiento.imagen }}" alt="alojamiento"></ion-img>
+    <ion-img
+      src="{{ alojamiento.imagen }}"
+      alt="alojamiento"
+      (click)="routerCasa(alojamiento.id_alojamiento)"
+    ></ion-img>
     <ion-card-header>
       <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
       <ion-card-subtitle
         >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
       >
     </ion-card-header>
-    <ion-card-content> {{ alojamiento.ciudad }} </ion-card-content>
-    <ion-card-content> ${{ alojamiento.precio }} </ion-card-content>
+    <ion-card-content>
+      <div class="ion-margin-bottom">
+        <ion-icon name="location-outline"></ion-icon>{{ alojamiento.ciudad }}
+      </div>
+      <div>${{ alojamiento.precio }}</div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 
