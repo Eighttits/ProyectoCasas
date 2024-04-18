@@ -8,11 +8,9 @@ const routes: Routes = [
   },
   {
     path: '',
-<<<<<<< HEAD
+
     redirectTo: '/home',
-=======
-    redirectTo: 'menu',
->>>>>>> 6de34994f33afc763a16bb6c6b61752f2e2dc266
+
     pathMatch: 'full'
   },
   // {
@@ -33,11 +31,9 @@ const routes: Routes = [
   // },
 
   {
-<<<<<<< HEAD
-    path: 'casa',
-=======
+
     path: 'casa/:id',
->>>>>>> 6de34994f33afc763a16bb6c6b61752f2e2dc266
+
     loadChildren: () => import('./pages/casa/casa.module').then( m => m.CasaPageModule)
   },
   {
@@ -52,11 +48,6 @@ const routes: Routes = [
     path: 'pagesAdmin/home-admin',
     loadChildren: () => import('./pagesAdmin/home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
   },
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 6de34994f33afc763a16bb6c6b61752f2e2dc266
 ];
 
 @NgModule({
