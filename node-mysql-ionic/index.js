@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 //Importar la conexion
 app.use("/api/", require("./routes/usuarios"));
 app.use("/api/", require("./routes/alojamientos"));
+app.use("/api/", require("./routes/reservas"));
 
 //configuracion para correr el servidor
 app.listen(app.get("port"), () => {

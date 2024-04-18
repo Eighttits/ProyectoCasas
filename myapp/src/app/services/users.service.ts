@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   url = "http://localhost:3000/api/usuarios";
+  urlIdUsuario = "http://localhost:3000/api/idUsuario";
   urlLogin = "http://localhost:3000/api/login";
   urlLoginAdmin = "http://localhost:3000/api/loginAdmin";
 
@@ -25,7 +26,10 @@ export class UsersService {
   obtenerUsuario(id:number): Observable<any> {
     return this.http.get(this.url+"/"+id);
   }
-
+  
+  obtenerIdUsuario(correo: string): Observable<any> {
+    return this.http.get(this.urlIdUsuario+"/"+correo);
+  }
 
   isLoggedIn(): boolean {
     // Verifica si hay información de sesión en el almacenamiento local
