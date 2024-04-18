@@ -12,24 +12,28 @@ export class LoginPage implements OnInit {
 
   public correo = "";
   public password = "";
+  public tipoAutenticacion = false;
 
-  constructor(private router: Router,private toastController: ToastController,
-    private alertController: AlertController, private usuariosService: UsersService) { }
+  constructor(
+    private router: Router,
+    private toastController: ToastController,
+    private alertController: AlertController,
+    private usuariosService: UsersService
+  ) { }
 
   ngOnInit() {
     console.log("hola");
   }
 
-  regresar(){
+  regresar() {
     this.router.navigate(["/home"]);
   }
 
-  async ingresar(){
-    // console.log("Usuario: "+this.usuario +"    Contraseña: "+ this.password );
-    if(this.correo == '' || this.password == "" ){
+  async ingresar() {
+    if (this.correo == '' || this.password == "") {
       const alert = await this.alertController.create({
         header: "ERROR AUTENTICACIÓN",
-        message: "El correo o contraseña se encuentran vacios, favor de validar",
+        message: "El correo o contraseña se encuentran vacíos, favor de validar",
         buttons: [
           {
             text: 'Aceptar',
@@ -41,42 +45,73 @@ export class LoginPage implements OnInit {
         ]
       });
       await alert.present();
-    }else{
+    } else {
       let datos = {
         correo: this.correo,
         password: this.password
       };
 
-      this.usuariosService.loginUsuario(datos)
-    .subscribe(
-      async respuesta => {
-        //console.log(respuesta);
-        if(respuesta.status){
-          this.router.navigate(["/home"]);
-          localStorage.setItem('correo',respuesta.datos[0].correo);
-        }else{
-          const alert = await this.alertController.create({
-            header:  "ERROR AUTENTICACIÓN",
-            message: respuesta.message,
-            buttons: [
-              {
-                text: 'Aceptar',
-                role: 'cancel',
-                handler: () => {
-                  // console.log('Alert canceled');
-                },
-              },
-            ]
-          });
-          await alert.present();
-        }
-      },
-      error => {
-        console.error(error);
-        // Manejar errores de manera adecuada
+      if (this.tipoAutenticacion) {
+        this.usuariosService.loginAdmin(datos)
+          .subscribe(
+            async respuesta => {
+              if (respuesta.status) {
+                this.router.navigate(["pagesAdmin/home-admin"]);
+                localStorage.setItem('correo', respuesta.datos[0].correo);
+                localStorage.setItem('rol', 'admin');
+              } else {
+                const alert = await this.alertController.create({
+                  header: "ERROR AUTENTICACIÓN",
+                  message: respuesta.message,
+                  buttons: [
+                    {
+                      text: 'Aceptar',
+                      role: 'cancel',
+                      handler: () => {
+                        // console.log('Alert canceled');
+                      },
+                    },
+                  ]
+                });
+                await alert.present();
+              }
+            },
+            error => {
+              console.error(error);
+              // Manejar errores de manera adecuada
+            }
+          );
+      } else {
+        this.usuariosService.loginUsuario(datos)
+          .subscribe(
+            async respuesta => {
+              if (respuesta.status) {
+                this.router.navigate(["/home"]);
+                localStorage.setItem('correo', respuesta.datos[0].correo);
+                localStorage.setItem('rol', 'user');
+              } else {
+                const alert = await this.alertController.create({
+                  header: "ERROR AUTENTICACIÓN",
+                  message: respuesta.message,
+                  buttons: [
+                    {
+                      text: 'Aceptar',
+                      role: 'cancel',
+                      handler: () => {
+                        // console.log('Alert canceled');
+                      },
+                    },
+                  ]
+                });
+                await alert.present();
+              }
+            },
+            error => {
+              console.error(error);
+              // Manejar errores de manera adecuada
+            }
+          );
       }
-    );
     }
   }
-
 }

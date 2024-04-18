@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'menu',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   // {
@@ -35,10 +35,16 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule)
   },
+  {
+    path: 'pagesAdmin/home-admin',
+    loadChildren: () => import('./pagesAdmin/home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
+  },
+
 
 ];
 

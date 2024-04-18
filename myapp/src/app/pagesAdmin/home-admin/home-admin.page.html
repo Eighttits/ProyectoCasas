@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>homeAdmin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mis casas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let alojamiento of alojamientos">
+    <ion-img src="{{ alojamiento.imagen }}" alt="alojamiento"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ alojamiento.nombre }}</ion-card-title>
+      <ion-card-subtitle
+        >Tipo de alojamiento: {{ alojamiento.tipo }}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content> {{ alojamiento.ciudad }} </ion-card-content>
+    <ion-card-content> ${{ alojamiento.precio }} </ion-card-content>
+  </ion-card>
+</ion-content>

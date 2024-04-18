@@ -28,8 +28,10 @@
         </ion-item>
 
         <ion-item>
-          <ion-checkbox>Entrar con cuenta de administrador</ion-checkbox>
+          <ion-label>Entrar con cuenta de administrador</ion-label>
+          <ion-checkbox [(ngModel)]="tipoAutenticacion" name="tipoAutenticacion"></ion-checkbox>
         </ion-item>
+        
   
         <ion-button expand="block" type="submit" class="btn my-4 w-100">Iniciar Sesión</ion-button>
       </ion-card-content>

@@ -12,6 +12,7 @@ export class UsersService {
 
   url = "http://localhost:3000/api/usuarios";
   urlLogin = "http://localhost:3000/api/login";
+  urlLoginAdmin = "http://localhost:3000/api/loginAdmin";
 
   constructor(private http: HttpClient) { }
 
@@ -25,9 +26,6 @@ export class UsersService {
     return this.http.get(this.url+"/"+id);
   }
 
-  logout(): void {
-    localStorage.removeItem('id'); // Elimina el usuario del almacenamiento local
-  }
 
   isLoggedIn(): boolean {
     // Verifica si hay información de sesión en el almacenamiento local
@@ -35,12 +33,24 @@ export class UsersService {
     return !!localStorage.getItem('correo');
   }
 
+  destroySession(): void {
+    // Elimina cualquier información de sesión del almacenamiento local
+    localStorage.removeItem('correo');
+    localStorage.removeItem('rol');
+    // Otros pasos opcionales para limpiar cualquier otro tipo de información de sesión
+}
+
+
   crearUsuario(datos: any): Observable<any> {
     return this.http.post<any>(this.url, datos);
   }
 
   loginUsuario(datos: any): Observable<any> {
     return this.http.post<any>(this.urlLogin, datos);
+  }
+
+  loginAdmin(datos: any): Observable<any> {
+    return this.http.post<any>(this.urlLoginAdmin, datos);
   }
 
 }

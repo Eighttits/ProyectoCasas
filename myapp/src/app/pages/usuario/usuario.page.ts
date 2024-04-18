@@ -17,4 +17,9 @@ export class UsuarioPage implements OnInit {
     }
   }
 
+  destruirSesion(){
+    this.usuariosService.destroySession();
+    location.reload();
+  }
+
 }
