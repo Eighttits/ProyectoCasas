@@ -15,4 +15,9 @@ export class ReservasService {
     return this.http.post<any>(this.url, datos);
   }
 
+  verificarReservas(id: number, fechaInicio: string, fechaFin: string): Observable<any> {
+    const urlWithParams = `${this.url}/${id}?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+    return this.http.get(urlWithParams);
+  }  
+
 }

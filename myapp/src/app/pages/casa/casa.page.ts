@@ -20,6 +20,7 @@ export class CasaPage implements OnInit {
   idUsuario: number;
   idAlojamiento : number;
   correo : string;
+  reservas: any[] = [];
 
   constructor(private alojamientosService: AlojamientosService, private route: ActivatedRoute, public alertController: AlertController, private usuariosService: UsersService, private router: Router, private reservasService: ReservasService) { }
 
@@ -90,7 +91,9 @@ export class CasaPage implements OnInit {
   }
 
   async reservar(idAlojamiento: number, precio: number) {
-    if (!this.usuariosService.isLoggedIn()) {
+    const today = new Date();
+    const fechaHoy = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    if (!this.usuariosService.isLoggedIn() || localStorage.getItem('rol')!='user') {
       this.router.navigate(["../login"]);
     } else{
       const storedCorreo = localStorage.getItem('correo');
@@ -120,16 +123,33 @@ export class CasaPage implements OnInit {
               data.idAlojamiento = idAlojamiento;
               data.total = precio;
               data.idCliente= this.idUsuario;
-              this.reservasService.realizarReserva(data).subscribe(
-                 (response) => {
-                   // Manejar la respuesta si es necesario
-                   console.log('Reserva realizada correctamente:', response);
-                 },
-                 (error) => {
-                   // Manejar cualquier error que ocurra durante la solicitud
-                   console.error('Error al realizar la reserva:', error);
-                 }
+              if(data.fechaInicio>=fechaHoy && data.fechaFin>data.fechaInicio) {
+                this.reservasService.verificarReservas(data.idAlojamiento, data.fechaInicio, data.fechaFin).subscribe(
+                  (data2) => {
+                    this.reservas = data2;
+                    if(this.reservas.length>0) {
+                      this.alertaReservas();
+                    } else {
+                      this.reservasService.realizarReserva(data).subscribe(
+                        (response) => {
+                          console.log(response);
+                          if(response.status===true) {
+                            this.alertaReservaCorrecta();
+                          }
+                        },
+                        (error) => {                    
+                          console.error('Error al realizar la reserva:', error);
+                        }
+                       );
+                    }
+                  },
+                  (error) => {
+                    console.error('Error al obtener reservas:', error);
+                  }
                 );
+              } else {
+                this.alertaFechas();
+              }
             }
           },
           {
@@ -163,28 +183,39 @@ export class CasaPage implements OnInit {
       }
     );
   }
-  
 
-  // reservas() {
-  //   const data = {
-  //     fechaInicio: '2023-01-01',
-  //     fechaFin: '2023-01-03',
-  //     idAlojamiento: 1,
-  //     idCliente: 1,
-  //     total: 2000
-  //   };
-  //   this.reservasService.realizarReserva(data).subscribe(
-  //     (response) => {
-  //       // Manejar la respuesta si es necesario
-  //       console.log('Reserva realizada correctamente:', response);
-  //     },
-  //     (error) => {
-  //       // Manejar cualquier error que ocurra durante la solicitud
-  //       console.error('Error al realizar la reserva:', error);
-  //     }
-  //   );
-  // }
-  
-  
+  async alertaFechas() {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: 'Introduzca fechas válidas',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  async alertaReservas() {
+    const alert = await this.alertController.create({
+      header: 'Alojamiento no disponible',
+      message: 'Favor de seleccionar otras fechas',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  async alertaReservaCorrecta() {
+    const alert = await this.alertController.create({
+      header: 'Reservado',
+      message: 'Su reserva se ha completado correctamente',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  verificarReservas(id: number, fechaInicio: string, fechaFin: string) {
+   
+  }
   
 }

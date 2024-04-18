@@ -17,4 +17,32 @@ router.post("/reservas", (req, res) => {
   );
 });
 
+router.get("/reservas/:id", (req, res) => {
+  const idAlojamiento = req.params.id;
+  const fechaInicio = req.query.fechaInicio; // Obtener la fecha de inicio de la consulta
+  const fechaFin = req.query.fechaFin; // Obtener la fecha de fin de la consulta
+
+  mysqlConnection.query(
+    "SELECT id, fecha_inicio, fecha_fin " +
+    "FROM reservas " +
+    "WHERE id_alojamiento = ? " +
+    "AND (" +
+    "(fecha_inicio <= ? AND fecha_fin >= ?) " +
+    "OR " +
+    "(fecha_inicio <= ? AND fecha_fin >= ?) " +
+    "OR " +
+    "(? <= fecha_inicio AND ? >= fecha_inicio)" +
+    ")",
+    [idAlojamiento, fechaInicio, fechaInicio, fechaFin, fechaFin, fechaInicio, fechaFin],
+    (err, result) => {
+      if (!err) {
+        res.json(result);
+      } else {
+        res.send(err);
+      }
+    }
+  );
+});
+
+
 module.exports = router;
