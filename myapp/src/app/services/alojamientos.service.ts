@@ -16,6 +16,17 @@ export class AlojamientosService {
   urlUbi = "http://localhost:3000/api/alojamientosUbi";
   urlFotos = "http://localhost:3000/api/fotos";
 
+  // url = "https://9fb8-189-177-178-192.ngrok-free.app/api/alojamientos";
+  // urlServicios = "https://9fb8-189-177-178-192.ngrok-free.app/api/servicios";
+  // urlCalificaciones = "https://9fb8-189-177-178-192.ngrok-free.app/api/calificaciones";
+  // urlComentarios = "https://9fb8-189-177-178-192.ngrok-free.app/api/comentarios";
+  // urlAdmin = "https://9fb8-189-177-178-192.ngrok-free.app/api/alojamientosAdmin";
+  // urlAdd = "https://9fb8-189-177-178-192.ngrok-free.app/api/alojamientosAdd";
+  // urlCar = "https://9fb8-189-177-178-192.ngrok-free.app/api/alojamientosCar";
+  // urlUbi = "https://9fb8-189-177-178-192.ngrok-free.app/api/alojamientosUbi";
+  // urlFotos = "https://9fb8-189-177-178-192.ngrok-free.app/api/fotos";
+
+
   constructor(private http: HttpClient) { }
 
   obtenerAlojamientos(): Observable<any>{

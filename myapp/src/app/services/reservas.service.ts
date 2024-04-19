@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class ReservasService {
   url = "http://localhost:3000/api/reservas";
 
+  // url = "https://9fb8-189-177-178-192.ngrok-free.app/api/reservas";
+
   constructor(private http: HttpClient) { }
 
   realizarReserva(datos: any): Observable<any> {

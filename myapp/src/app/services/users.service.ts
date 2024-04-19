@@ -16,6 +16,11 @@ export class UsersService {
   urlLoginAdmin = "http://localhost:3000/api/loginAdmin";
   urlReservas= "http://localhost:3000/api/reservasUsuario";
 
+  // url = "https://9fb8-189-177-178-192.ngrok-free.app/api/usuarios";
+  // urlIdUsuario = "https://9fb8-189-177-178-192.ngrok-free.app/api/idUsuario";
+  // urlLogin = "https://9fb8-189-177-178-192.ngrok-free.app/api/login";
+  // urlLoginAdmin = "https://9fb8-189-177-178-192.ngrok-free.app/api/loginAdmin";
+
   constructor(private http: HttpClient) { }
 
 

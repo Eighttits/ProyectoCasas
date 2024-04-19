@@ -39,23 +39,27 @@ export class AddHousePage implements OnInit {
   }
 
   async cargarFoto() {
-    try {
-      const image = await this.camera.getPicture({
-        quality: 90,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        mediaType: this.camera.MediaType.PICTURE,
-        correctOrientation: true,
-      });
 
-      if (image) {
-        // Agregar la URL de la foto al array de fotos
-        this.fotos.push(image);
-      }
-    } catch (error) {
-      console.error('Error al tomar la foto:', error);
-    }
   }
+
+  // async cargarFoto() {
+  //   try {
+  //     const image = await this.camera.getPicture({
+  //       quality: 90,
+  //       destinationType: this.camera.DestinationType.FILE_URI,
+  //       sourceType: this.camera.PictureSourceType.CAMERA,
+  //       mediaType: this.camera.MediaType.PICTURE,
+  //       correctOrientation: true,
+  //     });
+
+  //     if (image) {
+  //       // Agregar la URL de la foto al array de fotos
+  //       this.fotos.push(image);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error al tomar la foto:', error);
+  //   }
+  // }
 
   agregarCasa() {
     const nuevoAlojamiento = {
@@ -103,16 +107,16 @@ export class AddHousePage implements OnInit {
         );
 
         // Guardar las fotos en la base de datos
-        this.fotos.forEach(foto => {
-          this.alojamientosService.subirFoto(idAlojamiento, foto).subscribe(
-            responseFoto => {
-              console.log('Foto añadida con éxito:', responseFoto);
-            },
-            errorFoto => {
-              console.error('Error al agregar foto:', errorFoto);
-            }
-          );
-        });
+        // this.fotos.forEach(foto => {
+        //   this.alojamientosService.subirFoto(idAlojamiento, foto).subscribe(
+        //     responseFoto => {
+        //       console.log('Foto añadida con éxito:', responseFoto);
+        //     },
+        //     errorFoto => {
+        //       console.error('Error al agregar foto:', errorFoto);
+        //     }
+        //   );
+        // });
 
         this.router.navigate(['pagesAdmin/home-admin']);
       },
